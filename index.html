@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <script src="js/angular.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+  </head>
+  <body>
+    <div ng-app="mapApp" ng-controller="mapAppCtrl">
+      <div ng-show = "ViewTours == true">
+        <div class="panel panel-default col-xs-12">
+          <div class="row panel-heading">
+            <div class="col-xs-3"> DriverName </div>
+            <div class="col-xs-2"> RouteName </div>
+          </div>
+
+          <div id="form1" class = "padding-12px row">
+            <div class="col-xs-3">
+              <select class="form-control" ng-model="formDriverName" ng-init = "formDriverName = 'Alex' " aria-label="Contact method" name="type" id="type">
+                <option value = "Alex" ng-selected="1"> Alex </option>
+                <option value = "Spanky" >Spanky</option>
+                <option value = "Anton" >Anton</option>
+              </select>
+            </div>
+
+            <div class="col-xs-2">
+              <input class="form-control" type="text" ng-model="formRouteName" placeholder="RouteName" />
+            </div>
+
+            <div class="col-xs-3">
+              <button ng-click="NewTour()" type="button" class="btn btn-success">
+                Add a New Tour
+              </button>
+            </div>
+          </div>
+
+          <div ng-repeat="tourinfor in ToursInformation">
+            <div class = "row padding-12px">
+              <div class="col-xs-3"> {{ tourinfor.DriverName }} </div>
+              <div class="col-xs-2">
+                <a ng-click = "$parent.gotoTour($index)" class="pointer">{{ tourinfor.RouteName }}</a>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+
+      <div ng-show = "ViewTours == false" class="padding-12px navbar navbar-default navbar-static-top">
+        <a ng-click = "ViewTours = true" class="pointer btn btn-primary">View All Tours</a> <br/><br/>
+        
+        <div> <h4> Driver Name: {{ToursInformation[currentTour].DriverName}} </h4> </div>
+        <div> <h4> Route Name: {{ToursInformation[currentTour].RouteName}} </h4> </div>
+      </div>
+
+      <div class="container-fluid" ng-show = "ViewTours == false">
+        <div class="row">
+          <div id="tour" class="col-xs-1 list tour" droppable>
+            <div class="padding-4px item flex-div" id="{{ item.id }}" ng-repeat="item in Tours[currentTour]">
+              {{ item.text }}
+              <a class="pointer" ng-click="$parent.deleteTourPoint($index)">&times;</a>
+            </div>
+          </div>
+          <div id="points" class="col-xs-1 list points">
+            <div class="padding-4px item flex-div" id="{{ item.id }}" ng-repeat="item in DataPoints" draggable>
+              {{ item.text }}
+              <a class="pointer" ng-click="$parent.deletePoint($index)">&times;</a>
+            </div>
+          </div>
+          <div id = "form" class="col-xs-2">
+            <p>Waypoint Name:</p> <input class="form-control" id = "text" ng-model = "postext" type = "text"/> <br/>
+            <p>Latitude:</p> <input class="form-control" id = "LatId" ng-model = "latpos" type = "text"/> <br/>
+            <p>Longitude:</p><input class="form-control" id = "LngId" ng-model = "lngpos" type = "text"/> <br/>
+            <button class="col-xs-4 btn btn-xs btn-info" ng-click = "AddPosition()"> Add </button>
+            <button class="col-xs-4 col-xs-offset-2 btn btn-xs btn-info" ng-click = "CancelPosition()"> Cancel </button>
+          </div>
+          <div id="map-canvas"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

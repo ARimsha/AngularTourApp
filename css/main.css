@@ -1,0 +1,79 @@
+.padding-12px {
+  padding: 12px;
+}
+.padding-4px {
+  padding: 4px;
+}
+.list {
+  float: left;
+  margin-left: 5px;
+  min-height: 50px !important;
+}
+.flex-div {
+  display: flex;
+  justify-content: space-between;
+}
+.tour {
+  border: 2px solid blue;
+  border-radius: 4px;
+}
+
+.points {
+  border: 2px solid green;
+  border-radius: 4px;
+}
+
+.item {
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+.tour .item {
+  background-color: lightblue;
+}
+
+.points .item {
+  background-color: lightgreen;
+}
+
+.dragover,
+.dragging {
+  border: 2px solid;
+}
+
+#description {
+  float: left;
+  margin-left: 20px;
+  
+}
+
+.pointer {
+  cursor: pointer;
+}
+/** Tag line style **/
+.navbar-inverse {
+    height: 50px;
+    margin: 50px 0px 80px;
+}
+.brand-img {
+    border-radius: 50%;
+    position: relative;
+    top: -37px;
+    height: 128px;
+    width: 128px;
+}
+#map-canvas {
+    width: 500px;
+    height: 500px;
+}
+@media (max-width: 768px) {
+    .navbar-header {
+        float: left;
+        padding-left: 25px;
+    }
+    .navbar ul {
+        float: right;
+        display: inline-flex;
+    }
+}
